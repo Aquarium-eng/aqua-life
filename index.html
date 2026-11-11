@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#174e61">
+<meta name="description" content="ToDoを達成して魚を育てる小さな水族館ゲーム">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>AQUA LIFE</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;color:#173b49;background:#eef7f5}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{border:0;border-radius:12px;padding:10px 13px;font-weight:700;cursor:pointer}.app{max-width:760px;margin:auto;padding:16px 14px 36px}.top{display:flex;justify-content:space-between;align-items:center;margin:5px 0 15px}.brand{font-size:22px;font-weight:900;letter-spacing:3px}.sub{font-size:11px;color:#66818a}.wallet{background:white;border:1px solid #d7e8e5;border-radius:20px;padding:8px 11px;font-size:13px}.tabs{display:flex;gap:6px;margin-bottom:13px}.tab{flex:1;background:#dcebe8;color:#315864;font-size:12px;padding:11px 3px}.tab.active,.primary{background:#247e83;color:white}.panel{background:white;border:1px solid #dcebe8;border-radius:17px;padding:14px;margin-bottom:12px;box-shadow:0 3px 12px #245b6010}.hidden{display:none!important}.muted{color:#789097;font-size:12px}.tank{height:290px;border-radius:15px;overflow:hidden;position:relative;background:linear-gradient(#91d8df,#379bab 65%,#15566d);box-shadow:inset 0 -30px 0 #d4c18c}.tank:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 15% 12%,#ffffff88,transparent 28%)}.fish{position:absolute;font-size:37px;z-index:2;animation:swim 6s ease-in-out infinite alternate;filter:drop-shadow(1px 3px 2px #16485c55)}@keyframes swim{0%{transform:translate(-8px,0)}50%{transform:translate(18px,-12px)}100%{transform:translate(-3px,10px)}}.plant{position:absolute;bottom:14px;font-size:36px;z-index:3}.decor-tank{touch-action:pan-y}.placed-item{position:absolute;z-index:4;font-size:30px;transform:translate(-50%,-50%);touch-action:none;user-select:none;cursor:grab;filter:drop-shadow(1px 2px 2px #16485c66)}.placed-item.dragging{cursor:grabbing;z-index:8}.inventory-item{display:flex;align-items:center;justify-content:space-between;gap:6px}.history-item{padding:8px 10px;border-radius:10px;background:#f4f9f8;border:1px solid #e0ece9;font-size:12px}.bubble{position:absolute;bottom:-10px;border:1px solid #ffffffbb;border-radius:50%;width:7px;height:7px;animation:rise 6s linear infinite}@keyframes rise{to{transform:translateY(-320px);opacity:0}}.row{display:flex;gap:8px;align-items:center}.grow{flex:1;min-width:0}.field{width:100%;min-width:0;border:1px solid #d7e5e3;border-radius:10px;padding:11px;background:#f8fbfa;color:#173b49}.soft{background:#e8f2f0;color:#315864}.task,.fishcard{background:#f4f9f8;border:1px solid #e0ece9;border-radius:12px;padding:10px}.task{display:flex;align-items:center;gap:8px}.taskname{font-size:13px;overflow-wrap:anywhere}.taskname.done{text-decoration:line-through;color:#91a4a5}.meter{height:7px;background:#dfebe8;border-radius:9px;overflow:hidden}.meter span{display:block;height:100%;background:#4db39b}.tag{font-size:11px;border-radius:20px;padding:4px 8px;background:#e9f2ef}.fishgrid,.itemgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.fishcard{font-size:12px}.fishbig{font-size:27px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#174e61;color:white;padding:12px 17px;border-radius:13px;font-size:13px;box-shadow:0 4px 18px #0003;z-index:10;max-width:90vw;text-align:center}.center{text-align:center}.capsule{font-size:68px;margin:20px;animation:bob 1.4s ease-in-out infinite alternate}@keyframes bob{to{transform:rotate(9deg) scale(1.06)}}.footer{text-align:center;color:#8aa0a2;font-size:10px;margin-top:15px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="brand">AQUA LIFE</div><div class="sub">YOUR LITTLE UNDERWATER WORLD</div></div><div class="wallet">🪙 <b id="coins">0</b>　🥣 <b id="foodtotal">0</b></div></header>
+<nav class="tabs"><button class="tab active" data-tab="tank">🐠 水槽</button><button class="tab" data-tab="todo">📝 ToDo</button><button class="tab" data-tab="gacha">🎁 ガチャ</button><button class="tab" data-tab="book">📖 図鑑</button><button class="tab" data-tab="decor">🪸 装飾</button></nav>
+<section id="page-tank">
+ <div class="row" style="justify-content:space-between;margin:5px 2px 10px"><b>MY AQUARIUM</b><span class="tag" id="level">LEVEL 1</span></div>
+ <div class="tank" id="tank"><span style="position:absolute;top:12px;left:13px;color:white;font-size:12px;font-weight:700;text-shadow:0 1px 4px #245">Little Ocean</span><div id="swimmers"></div><div class="plant" style="left:5%">🌿</div><div class="plant" style="left:84%">🌱</div></div>
+ <div class="row" style="justify-content:space-between;margin:9px 2px 12px"><b id="fishcount">🐟 魚 0匹</b><span class="muted">魚を選んでエサをあげよう</span></div>
+ <div class="panel"><b>🐠 お魚のお世話</b><div id="fishlist" class="fishgrid" style="margin-top:10px"></div><p id="nofish" class="muted center">まだ魚がいないよ。ガチャで仲間を迎えよう！</p></div>
+ <div class="panel"><b>🥣 エサのストック</b><div id="foodstock" class="row" style="flex-wrap:wrap;margin-top:10px"></div></div>
+</section>
+<section id="page-todo" class="hidden">
+ <div class="panel"><b>今日のToDoリスト</b><p class="muted">タスクを達成するとエサを1個獲得！</p>
+  <div class="row"><input id="taskinput" class="field grow" maxlength="60" placeholder="例：数学の問題を解く"><button id="add" class="primary">追加</button></div>
+  <div class="row" style="margin-top:8px"><select id="tasktype" class="field"><option>勉強</option><option>生活</option><option>その他</option></select><input id="taskdue" class="field" type="date" aria-label="期限"><span class="tag">達成報酬：エサ1個</span></div>
+ </div>
+ <div class="panel"><div class="row" style="justify-content:space-between"><b>やること</b><span id="progress" class="muted">0 / 0 達成</span></div><div class="meter" style="margin:10px 0"><span id="bar" style="width:0"></span></div><div id="tasks" style="display:grid;gap:8px"></div></div>
+ <div class="panel row" style="justify-content:space-between"><div><b>累計達成数</b><div class="muted">5件達成ごとにガチャコイン1枚</div></div><b style="font-size:20px">🏆 <span id="total">0</span></b></div><div class="panel"><b>📚 クリアしたタスクの履歴</b><div id="history" style="display:grid;gap:7px;margin-top:10px"></div></div>
+</section>
+<section id="page-gacha" class="hidden">
+ <div class="panel center"><b style="font-size:19px">🎁 AQUA GACHA</b><p class="muted">新しい仲間とアイテムを手に入れよう</p><div class="capsule">🎁</div><b>1回 ＝ 🪙 1コイン</b><p class="muted">魚 60% ・ 水槽アイテム 40%</p><button id="pull" class="primary" style="width:100%;margin-top:8px">ガチャを回す！</button><p class="muted">所持コイン：<b id="gachacoin">0</b></p></div>
+ <div id="prize" class="panel center hidden"><div class="muted">GET!</div><div id="prizeemoji" style="font-size:55px;margin:8px"></div><b id="prizename" style="font-size:18px"></b><p id="prizedesc" class="muted"></p></div>
+ <div class="panel"><b>ラインナップ</b><div id="lineup" class="itemgrid" style="margin-top:10px"></div></div>
+</section>
+<section id="page-book" class="hidden"><div class="panel"><b>🐠 お魚図鑑</b><div id="fishbook" class="itemgrid" style="margin-top:10px"></div></div><div class="panel"><b>🪸 デコレーション図鑑</b><div id="decorbook" class="itemgrid" style="margin-top:10px"></div></div></section><section id="page-decor" class="hidden"><div class="panel"><b>🪸 水槽の飾り付け</b><p class="muted">「配置」を選んでから水槽内をタップすると置けるよ。置いた飾りはドラッグで移動できるよ。</p><div id="decor-tank" class="tank decor-tank"><span style="position:absolute;top:12px;left:13px;color:white;font-size:12px;font-weight:700;text-shadow:0 1px 4px #245">DECORATE</span><div id="decor-swimmers"></div><div id="placed-decor"></div></div><p id="placing-hint" class="muted center" style="margin:9px 0"></p></div><div class="panel"><b>🎒 持っている装飾</b><div id="decor-inventory" class="itemgrid" style="margin-top:10px"></div></div><div class="panel"><b>水槽に置いている装飾</b><div id="placed-list" style="display:grid;gap:7px;margin-top:10px"></div></div></section>
+<div class="footer">AQUA LIFE · あなたの小さな水族館</div>
+</div><div id="toast" class="toast hidden"></div>
+<script src="game.js"></script><script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(console.error))}</script>
+</body></html>

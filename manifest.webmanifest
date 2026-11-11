@@ -1,0 +1,25 @@
+{
+  "name": "AQUA LIFE - 小さな水族館",
+  "short_name": "AQUA LIFE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eef7f5",
+  "theme_color": "#174e61",
+  "description": "ToDoを達成して魚を育てる小さな水族館ゲーム",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
